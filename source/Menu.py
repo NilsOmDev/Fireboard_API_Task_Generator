@@ -31,7 +31,7 @@ def create_task_from_pool():
 
     fire_task = FireboardTask(task, description, len(tasks))
     # deactivate the api access here:
-    fire_task.send_task_to_api()
+    # fire_task.send_task_to_api()
     print("Done")
 
 def add_car_func(cmd_splitted):
