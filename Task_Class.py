@@ -32,7 +32,7 @@ class Task:
     
     def _hasTaskEnded(self):
         for car in self._cars:
-            if car.get_status() != 4:
+            if car.get_status() != 1:
                 return False
         
         return True
