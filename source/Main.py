@@ -1,21 +1,15 @@
 #
 # author = Nils Ommen
-# date = 07.08.2023
-# version = 1.0
+# date = 12.08.2024
+# version = 2.0
 # application use = fireboard api access
 # 
 # Main.py
 
-import os
-from Menu import *
+from Window_Manager import window_create
 
-auth_key = ''       # insert your API authentication key here
 
 if __name__ == '__main__':
-    print("Starting...")
+    print("[INFO]: Starting...")
 
-    while(True):
-        os.system('cls')
-        print_table()
-        print_info()
-        main_menu()
+    window_create()

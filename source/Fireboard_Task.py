@@ -1,7 +1,7 @@
 #
 # author = Nils Ommen
-# date = 07.08.2023
-# version = 1.0
+# date = 12.08.2024
+# version = 2.0
 # application use = fireboard api access
 # 
 # Fireboard_Task.py
@@ -10,9 +10,24 @@ import random
 import time
 import requests
 import xml.etree.ElementTree as ET
+from geopy.geocoders import Nominatim
+import os
+import subprocess
 
-from Main import auth_key
+geolocator = Nominatim(user_agent="Fireboard_Task_Generator")
 
+env_tag = 'FIREBOARD_API'
+
+def set_auth_key(auth_key):
+    subprocess.run(['setx', env_tag, auth_key])
+    os.environ[env_tag] = auth_key
+
+def get_auth_key():
+    if auth_key := os.environ.get(env_tag):
+        return auth_key
+    print("[ERROR]: Auth-Key for Fireboard Portal is not found. Insert in Systemvariables.")
+    return "0a0a0"
+    
 class FireboardTask:    
 
     def __init__(self, task, description, number):
@@ -33,7 +48,7 @@ class FireboardTask:
         
         url = 'https://login.fireboard.net/api'
         headers = {'Content-Tpe': 'application/xml'}
-        params = {'authkey': auth_key, 'call' : 'operation_data'}
+        params = {'authkey': get_auth_key(), 'call' : 'operation_data'}
 
         response = requests.post(url, data=self._xml_string, headers=headers, params=params)
         print("An Fireboard Portal übertragen...")
@@ -41,22 +56,17 @@ class FireboardTask:
 
         return response
            
-
     def _geocode_address(self):
-        url = "https://nominatim.openstreetmap.org/search"
+        location = geolocator.geocode(self._task.get_address())
+        try:
+            lat = location.latitude
+            lon = location.longitude
+            return str(lat), str(lon)
+        except AttributeError as e:
+            print("[ERROR]: Couldn't find a coordinate")
 
-        params = {"q": self._task.get_address(), "format": "json"}
-
-        response = requests.get(url, params=params)
-        data = response.json()
-
-        if data:
-            lat = data[0]["lat"]
-            lon = data[0]["lon"]
-            return lat, lon
-        
-        return None
-
+        return "53.516", "7.27572"
+       
     def _generate_unique_id(self):
         hex_digits = '0123456789ABCDEF'
         unique_digits = [random.choice(hex_digits) for _ in range(20)]
@@ -107,5 +117,5 @@ class FireboardTask:
         situation.text = self._description
 
         xml_string = ET.tostring(root, encoding='utf-8')
-        
+       
         return xml_string.decode('utf-8')
