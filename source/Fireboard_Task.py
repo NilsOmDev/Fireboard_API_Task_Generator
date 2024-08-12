@@ -65,7 +65,7 @@ class FireboardTask:
         except AttributeError as e:
             print("[ERROR]: Couldn't find a coordinate")
 
-        return "53.516", "7.27572"
+        return "51.80", "10.25"
        
     def _generate_unique_id(self):
         hex_digits = '0123456789ABCDEF'
