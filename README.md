@@ -6,6 +6,7 @@ Der Benutzer dieser Anwendung kann, währrenddessen die Einsätze mit dokumentie
 Die Anwendung dient so im Bereich der Simulation und dem Training von Großschadenslagen mit dem ELW1 / ELW2 in einem Kontext von Hilfsorganisationen.
 
 # Erste Schritte:
+- Stelle sicher, dass Python in der Version 3 installiert ist und alle Bibliotheken verfügbar sind
 - Repository in lokalen Speicher forken
 - Streets_Pool.xlsx mit Adressen (Straße & Ort) füllen
 - Streets_Pool.csv erzeugen durch Streets_Pool.xlsx
@@ -40,7 +41,10 @@ Sobald alle Fahrzeuge wieder Status 1 haben, wir der Auftrag automatisch vollst�
 5. "undo"
 Löscht den vorherigen Befehl, sofern dieser "fzg" oder "info" war.
 
-6. "exit"
+# Known-Issues:
+- Geocodierung funktioniert nicht und wirft keinen leserlichen Fehler
+
+7. "exit"
 Beendet das Programm.
 
 
