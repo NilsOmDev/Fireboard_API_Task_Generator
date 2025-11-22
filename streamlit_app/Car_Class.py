@@ -1,11 +1,3 @@
-#
-# author = Nils Ommen
-# date = 10.08.2023
-# version = 1.0
-# application use = fireboard api access
-# 
-# Car_Class.py
-
 class Car:
 
     _status_numbers = [2, 3, 4, 1]

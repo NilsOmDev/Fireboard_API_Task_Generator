@@ -1,0 +1,27 @@
+npm cache clean --force
+
+npm install
+npm run dump
+set NODE_ENV=production
+npm run servewindows
+
+
+2️⃣ geopy in Pyodide umgehen und externe API verwenden
+
+Da Pyodide ssl nicht unterstützt, kannst du statt geopy eine externe API mit requests oder httpx verwenden. Zum Beispiel:
+
+import json
+import httpx
+
+def get_location(address):
+    url = f"https://nominatim.openstreetmap.org/search?q={address}&format=json"
+    response = httpx.get(url)
+    data = response.json()
+    if data:
+        return data[0]["lat"], data[0]["lon"]
+    return None
+
+log(get_location("Berlin, Germany"))
+
+⚠️ Vorteil: Funktioniert in Pyodide ohne ssl.
+⚠️ Nachteil: httpx muss als Abhängigkeit installiert sein.
