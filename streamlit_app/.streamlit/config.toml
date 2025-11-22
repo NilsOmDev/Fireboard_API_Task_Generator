@@ -1,0 +1,12 @@
+[theme]
+base="dark"
+font="monospace"
+
+[client]
+showSidebarNavigation = false
+
+[global]
+developmentMode = false
+
+[server]
+port = 8501

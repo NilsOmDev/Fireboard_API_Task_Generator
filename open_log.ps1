@@ -1,0 +1,1 @@
+Get-Content C:\Users\PC-Nils\FireboardTaskGenerator\output.log -Wait

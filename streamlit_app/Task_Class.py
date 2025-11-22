@@ -1,12 +1,5 @@
-#
-# author = Nils Ommen
-# date = 07.08.2023
-# version = 1.0
-# application use = fireboard api access
-# 
-# Task_Class.py
-
 from Car_Class import Car
+import global_vars
 
 class Task:
 
@@ -31,6 +24,9 @@ class Task:
         return self._hasTaskEnded()
     
     def _hasTaskEnded(self):
+        if not(global_vars.auto_delete):
+            return False
+
         for car in self._cars:
             if car.get_status() != 1:
                 return False
@@ -78,6 +74,12 @@ class Task:
             cars.append(str(car.get_status()))
         return cars
     
+    def get_cars_with_status(self):
+        cars = []
+        for car in self._cars:
+            cars.append((car.get_name(), car.get_status()))
+        return cars
+
     def get_infos(self):
         return self._infos
         
