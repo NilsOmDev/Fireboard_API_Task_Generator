@@ -3,6 +3,7 @@ node_modules/
 build/
 dist/
 data/
+open_log.ps1
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

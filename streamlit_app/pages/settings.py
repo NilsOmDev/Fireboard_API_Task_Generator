@@ -55,4 +55,13 @@ st.divider()
 st.write("Entwickler Einstellung: Debug Mode aktivieren, um mehr Informationen in der Konsole einzustellen. ")
 st.session_state['debug_mode'] = st.toggle("Debug Mode", key="debug_mode_input", value=global_vars.debug_mode, on_change=save_settings)
 
-    
+st.divider()
+
+st.write("Timer Einstellungen für automatische Einsatzerstellung.")
+
+st.write("Nach Ablauf einer zufälligen Zeit innerhalb der minimalen bis zur maximalen Zeitdauer, wird ein neuer Einsatz erstellt.")
+st.session_state['default_time'] = st.number_input("Minimale Zeitdauer: ", value=st.session_state['default_time'], min_value=1, max_value=st.session_state['maximal_time'], key="default_time_input")
+st.session_state['maximal_time'] = st.number_input("Maximale Zeitdauer: ", value=st.session_state['maximal_time'], min_value=st.session_state['default_time'], key="maximal_time_input")
+
+if st.button("Speichern", key="save_time"):
+    save_settings()

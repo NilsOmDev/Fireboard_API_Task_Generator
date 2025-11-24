@@ -1,10 +1,25 @@
 import streamlit as st
 from Menu import *
 from Dialog_Manager import *
-from Dialog_Manager import *
+import asyncio
+from datetime import datetime, timedelta
 from global_func import log
+import random
 
 st.set_page_config(page_title="Einsatzverwaltung", layout="wide")
+
+# ===== Timer Einstellungen =====
+if "current_duration" not in st.session_state:
+    st.session_state.current_duration = random.randint(global_vars.default_time, global_vars.maximal_time)
+
+if "running" not in st.session_state:
+    st.session_state.running = False
+
+if "end_time" not in st.session_state:
+    st.session_state.end_time = datetime.now() + timedelta(seconds=st.session_state.current_duration)
+
+if "current_remaining" not in st.session_state:
+    st.session_state.current_remaining = st.session_state.current_duration
 
 def status_num_to_icon(status):
     if status == 1:
@@ -36,11 +51,13 @@ if "cmd_stack" not in st.session_state:
 
 # Buttons für Aktionen
 col1, col2, col3, col4, col5, col6 = st.columns(6)
-if col1.button("Neuer Einsatz"):
+if col1.button("Neuer Einsatz", disabled=st.session_state.running):
     einsatz_erstellen()
 
-if col2.button("Eigener Einsatz"):
+if col2.button("Eigener Einsatz", disabled=st.session_state.running):
     eigenen_einsatz_erstellen()
+
+
         
 # if col5.button("Undo"):
 #     if st.warning("Letzten Befehl rückgängig machen?"):
@@ -133,3 +150,46 @@ if "einsatz_löschen" in st.session_state:
         close_task(line)
         del st.session_state["einsatz_löschen"]
         reload_table()
+
+
+
+# ===== UI Controls =====
+col1, col2 = st.columns(2)
+
+button_placeholder = col1.empty()
+def toggle_running():
+    st.session_state.running = not st.session_state.running
+    st.session_state.end_time = datetime.now() + timedelta(seconds=st.session_state.current_remaining)
+
+button_label = "Pause" if st.session_state.running else "Start"
+button_placeholder.button(button_label, on_click=toggle_running)
+
+ph = col2.empty()
+mm, ss = divmod(int(st.session_state.current_remaining), 60)
+ph.metric("Neuer Einsatz in:", f"{mm:02d}:{ss:02d}")
+
+# ===== Funktion, die nach Ablauf ausgeführt wird =====
+def on_timer_finish():
+    log("[INFO]: Timer elapsed.")
+    create_task_from_pool()
+
+# ===== Async Countdown Loop =====
+async def countdown():
+    while st.session_state.running:
+        now = datetime.now()
+        st.session_state.current_remaining = (st.session_state.end_time - now).total_seconds()
+
+        if st.session_state.current_remaining <= 0:
+            on_timer_finish()
+            st.session_state.current_duration = random.randint(global_vars.default_time, global_vars.maximal_time)
+            st.session_state.end_time = datetime.now() + timedelta(seconds=st.session_state.current_duration)
+            st.rerun() # reload table
+
+        # Update UI
+        mm, ss = divmod(int(st.session_state.current_remaining), 60)
+        ph.metric("Neuer Einsatz in:", f"{mm:02d}:{ss:02d}")
+        await asyncio.sleep(1)
+
+# ===== Start Async Loop =====
+asyncio.run(countdown())
+
