@@ -1,6 +1,0 @@
-npm cache clean --force
-
-npm install
-npm run dump
-set NODE_ENV=production
-npm run servewindows

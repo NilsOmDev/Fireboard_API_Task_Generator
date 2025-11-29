@@ -14,3 +14,7 @@ Debug Kompilieren:
 3. npm run dump
 4. set NODE_ENV=production
 5. npm run servewindows
+
+EXE erstellen:
+
+1. npx electron-builder
