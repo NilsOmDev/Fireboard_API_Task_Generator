@@ -1,7 +1,6 @@
 from Task_Class import Task
 from Task_Manager import *
 from Fireboard_Task import FireboardTask
-import asyncio
 
 import global_vars
 
@@ -30,8 +29,7 @@ def create_task(address, msg_short, msg_text, description):
     if global_vars.send_task:
         log("[INFO]: Task generated and send: " + task.get_message_short() + " " + task.get_address())
         
-        loop = asyncio.get_event_loop()
-        loop.run_until_complete(fire_task.send_task_to_api())
+        fire_task.send_task_to_api()
     else:
         log("[INFO]: Task generated but not send " + task.get_message_short() + " " + task.get_address())
 

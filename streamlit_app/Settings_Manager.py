@@ -1,14 +1,12 @@
 import global_vars
 import json
-import os
 import streamlit as st
+import os
 
 from global_func import log
 
-log("Settings: ")
-log(os.getcwd())
-
-file_name = "/mnt/settings.json"
+home_dir = os.path.expanduser("~")
+file_name = home_dir + "/FireboardTaskGenerator/settings.json"
 
 def save_settings():  
     variables_to_save = {"send_task" : st.session_state['send_task'],
