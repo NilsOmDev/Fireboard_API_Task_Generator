@@ -2,13 +2,15 @@ import csv
 import random
 import pandas as pd
 import os
-from global_func import log
+
+from backend.global_func import log
 
 streets_pool = []
 tasks_pool = []
 cars_pool = []
 
-data_dir = "/mnt/"
+home_dir = os.path.expanduser("~")
+data_dir = home_dir + "/FireboardTaskGenerator/"
 
 streets_pool_csv_name = data_dir + "Streets_Pool.csv"
 streets_row_ort_name = "Ort"

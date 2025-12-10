@@ -1,8 +1,8 @@
 import streamlit as st
-from Settings_Manager import load_settings, save_settings
-from global_func import log
 
-import global_vars
+from backend.Settings_Manager import load_settings, save_settings
+from backend.global_func import log
+import backend.global_vars as global_vars
 
 st.set_page_config(page_title="Einstellungen", layout="wide")
 

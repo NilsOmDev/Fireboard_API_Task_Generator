@@ -5,16 +5,3 @@ Aufträge / Einsätze werden automatisiert anhand einer Bibliothek erzeugt und a
 Als Simulation können so die Empfänger in der Fireboard Schnittstelle den Auftrag entgegennehmen und bearbeiten.
 Der Benutzer dieser Anwendung kann, währrenddessen die Einsätze mit dokumentieren und mit weiteren Informationen sowie alarmierten Fahrzeugen hinterlegen.
 Die Anwendung dient so im Bereich der Simulation und dem Training von Großschadenslagen mit dem ELW1 / ELW2 in einem Kontext von Hilfsorganisationen.
-
-# Build Prozess
-Debug Kompilieren:
-
-1. npm cache clean --force
-2. npm install
-3. npm run dump
-4. set NODE_ENV=production
-5. npm run servewindows
-
-EXE erstellen:
-
-1. npx electron-builder

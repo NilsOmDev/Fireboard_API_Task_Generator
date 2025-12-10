@@ -2,7 +2,7 @@ import streamlit as st
 import pandas as pd
 
 from Dialog_Manager import standard_zurücksetzen
-from Task_Manager import tasks_pool, import_tasks, save_tasks, save_standard_tasks
+from backend.Task_Manager import tasks_pool, import_tasks, save_tasks, save_standard_tasks
 
 st.set_page_config(page_title="Einstellungen - Einsatz Pool", layout="wide")
 
