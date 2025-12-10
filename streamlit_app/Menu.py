@@ -1,8 +1,8 @@
-from Task_Class import Task
-from Task_Manager import *
-from Fireboard_Task import FireboardTask
+from backend.Task_Class import Task
+from backend.Task_Manager import *
+from backend.Fireboard_Task import FireboardTask
 
-import global_vars
+import backend.global_vars as global_vars
 
 tasks = []
 cmd_stack = []

@@ -1,10 +1,10 @@
 import streamlit as st
+from streamlit_autorefresh import st_autorefresh 
+import random
+
 from Menu import *
 from Dialog_Manager import *
-from streamlit_autorefresh import st_autorefresh 
-from datetime import datetime, timedelta
-from global_func import log
-import random
+from backend.global_func import log
 
 st.set_page_config(page_title="Einsatzverwaltung", layout="wide")
 

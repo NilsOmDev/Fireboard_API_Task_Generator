@@ -2,7 +2,7 @@ import streamlit as st
 import pandas as pd
 
 from Dialog_Manager import standard_zurücksetzen
-from Task_Manager import streets_pool, import_streets, save_streets, save_standard_streets
+from backend.Task_Manager import streets_pool, import_streets, save_streets, save_standard_streets
 
 st.set_page_config(page_title="Einstellungen - Adressen Pool", layout="wide")
 

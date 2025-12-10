@@ -3,9 +3,9 @@ import time
 import requests
 import xml.etree.ElementTree as ET
 import io
-from global_func import log
 
-import global_vars
+from backend.global_func import log
+import backend.global_vars as global_vars
 
 env_tag = 'FIREBOARD_API'
 

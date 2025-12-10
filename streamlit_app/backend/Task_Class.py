@@ -1,5 +1,5 @@
-from Car_Class import Car
-import global_vars
+from backend.Car_Class import Car
+import backend.global_vars as global_vars
 
 class Task:
 

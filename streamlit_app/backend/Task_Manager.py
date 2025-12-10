@@ -2,7 +2,8 @@ import csv
 import random
 import pandas as pd
 import os
-from global_func import log
+
+from backend.global_func import log
 
 streets_pool = []
 tasks_pool = []

@@ -1,9 +1,10 @@
-import global_vars
 import json
 import streamlit as st
 import os
 
-from global_func import log
+from backend.global_func import log
+import backend.global_vars as global_vars
+
 
 home_dir = os.path.expanduser("~")
 file_name = home_dir + "/FireboardTaskGenerator/settings.json"
