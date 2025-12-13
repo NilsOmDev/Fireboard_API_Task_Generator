@@ -1,5 +1,5 @@
 import streamlit as st
-from streamlit_autorefresh import st_autorefresh 
+from streamlit_app import st_autorefresh
 import random
 
 from Menu import *
